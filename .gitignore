@@ -5,7 +5,7 @@
 *.ctxt
 
 .mtj.tmp/
-
+server/target
 *.jar
 *.war
 *.nar
