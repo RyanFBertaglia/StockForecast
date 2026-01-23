@@ -6,6 +6,8 @@
 
 .mtj.tmp/
 server/target
+server/src/test/resources/
+
 *.jar
 *.war
 *.nar
