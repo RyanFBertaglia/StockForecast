@@ -5,6 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 public class NeededInfoTest {
 
     private static final String metadata = "src/test/resources/model/metadata_16.json";
+    LocalDate today = LocalDate.now();
 
     @Test
     public void getDateReference() {
@@ -32,15 +35,37 @@ public class NeededInfoTest {
             } else {
                 System.out.println("Reference date not found");
             }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         assertFalse(date.isEmpty(), "The date should not be empty");
-
     }
 
+    @Test
+    public void getDayOfWeek() {
+        int dayOfWeek = today.getDayOfWeek().getValue();
+        System.out.println("Day of week: " + dayOfWeek);
+    }
 
+    @Test
+    public void getMonth() {
+        int month = today.getMonthValue();
+        System.out.println("Month: " + month);
+    }
+
+    @Test
+    public void getDayOfMonth() {
+        int dayOfMonth = today.getDayOfMonth();
+        System.out.println("Day of month: " + dayOfMonth);
+    }
+
+    @Test
+    public void getDaysSinceReference() {
+        LocalDate referenceDate = LocalDate.parse("2025-05-25");
+        long daysSinceReference = ChronoUnit.DAYS.between(referenceDate, today);
+        assertFalse(daysSinceReference < 0, "Wrong information, it has been more time");
+        System.out.println("Days since reference: " + daysSinceReference);
+    }
 
 
  /*
