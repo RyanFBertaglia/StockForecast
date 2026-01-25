@@ -12,8 +12,9 @@ public class Sells {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_product", nullable = false)
-    private Long productId;
+    @ManyToOne
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    private Product product;
 
     private LocalDate date;
     private Integer quantity;
